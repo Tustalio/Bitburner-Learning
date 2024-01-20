@@ -6,16 +6,16 @@ import {
     getFnRunViaNsExec, autoRetry
 } from './helpers.js'
 
-// daemon.js has histocially been the central orchestrator of almost every script in the game.
+// daemon.js has historically been the central orchestrator of almost every script in the game.
 // Only recently has it been "enslaved" to an even higher-level orchestrator: autopilot.js
 // Its primary job is to manage hacking servers for income, but it also manages launching
-// a myriad of helper scripts to take advantage of other game mechanics (such as solving coding contraacts)
+// a myriad of helper scripts to take advantage of other game mechanics (such as solving coding contracts)
 
 // NOTE: This is the the oldest piece of code in the repo and is a mess of global properties and
 //       functions scattered all over the place. I'll try to clean it up and organize it better over time
-//       but my appologies if you are trying to read it. Other scripts should serve as better examples.
+//       but my apologies if you are trying to read it. Other scripts should serve as better examples.
 
-// These parameters are meant to let you tweak the script's behaviour from the command line (without altering source code)
+// These parameters are meant to let you tweak the script's behavior from the command line (without altering source code)
 let options;
 const argsSchema = [
     ['h', false], // Do nothing but hack, no prepping (drains servers to 0 money, if you want to do that for some reason)
@@ -26,7 +26,7 @@ const argsSchema = [
     ['stock-manipulation-focus', false], // Stocks are main source of income - kill any scripts that would do them harm (TODO: Enable automatically in BN8)
     ['v', false], // Detailed logs about batch scheduling / tuning
     ['verbose', false], // Same as above
-    ['o', false], // Good for debugging, run the main targettomg loop once then stop, with some extra logs
+    ['o', false], // Good for debugging, run the main targeting loop once then stop, with some extra logs
     ['run-once', false], // Same as above
     ['x', false], // Focus on a strategy that produces the most hack EXP rather than money
     ['xp-only', false], // Same as above
@@ -49,7 +49,7 @@ const argsSchema = [
     ['no-share', false], // Disable sharing free ram to increase faction rep gain
     ['share-cooldown', 5000], // Wait before attempting to schedule more share threads (e.g. to free RAM to be freed for hack batch scheduling first)
     ['share-max-utilization', 0.8], // Set to 1 if you don't care to leave any RAM free after sharing. Will use up to this much of the available RAM
-    ['no-tail-windows', false], // Set to true to prevent the default behaviour of opening a tail window for certain launched scripts. (Doesn't affect scripts that open their own tail windows)
+    ['no-tail-windows', false], // Set to true to prevent the default behavior of opening a tail window for certain launched scripts. (Doesn't affect scripts that open their own tail windows)
     ['initial-study-time', 10], // Seconds. Set to 0 to not do any studying at startup. By default, if early in an augmentation, will start with a little study to boost hack XP
     ['initial-hack-xp-time', 10], // Seconds. Set to 0 to not do any hack-xp grinding at startup. By default, if early in an augmentation, will start with a little study to boost hack XP
     ['disable-script', []], // The names of scripts that you do not want run by our scheduler
